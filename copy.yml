@@ -1,0 +1,11 @@
+---
+- name: to copy a file
+  hosts: all
+  become: true
+  tasks:
+  - name: copy file
+    copy:
+      src: /home/ansible/hosts
+      dest: /home/
+      mode: 066
+      owner: ansible

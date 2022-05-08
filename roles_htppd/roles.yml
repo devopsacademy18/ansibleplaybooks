@@ -1,0 +1,6 @@
+---
+- name: Run roles playbook
+  hosts: all
+  become: true
+  roles:
+    - roles_htppd   

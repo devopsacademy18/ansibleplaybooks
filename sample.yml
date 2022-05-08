@@ -1,0 +1,10 @@
+---
+- name: This playbook for creating ansible user
+  hosts: all
+  become: true
+  vars_files:
+    - user.yml 
+  tasks:
+    - name: creating  user
+      user: 
+        name= "{{ user }}"    

@@ -1,0 +1,37 @@
+---
+- name: install apache packages
+  hosts: all
+  become: true
+    # gather_facts: no  
+  tasks:
+
+  - name: install httpd
+    yum:
+         name: httpd
+         state: present 
+    when: ansible_os_family == "RedHatG"
+
+  - name: install service
+    service:
+             name: httpd
+             state: started 
+    when: ansible_os_family == "RedHat"
+
+  - name: install apache
+    apt:
+         name: apache2
+         state: present
+    when: ansible_os_family == "Debian"
+
+  - name: intall service
+    service:
+             name: apache2
+             state: started 
+    when: ansible_os_family == "Debian" 
+               
+  - name: Copy index file
+    copy:
+          src: /home/ansible/playbooks/index.html
+          dest: /var/www/html/  
+          mode: 0666
+  

@@ -1,0 +1,9 @@
+---
+- name: To test git repo
+  hosts: all
+  become: true
+  tasks:
+  - name: to pull git repo
+    git:
+         repo: https://github.com/devopsacademy18/ansibletest.git
+         dest: /home/ansible/playbook   

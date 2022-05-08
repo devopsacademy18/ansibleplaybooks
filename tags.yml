@@ -1,0 +1,37 @@
+---
+- name: install apache packages
+  hosts: all
+  become: true
+    # gather_facts: no  
+  tasks:
+
+  - name: install httpd
+    yum:
+         name: httpd
+         state: present 
+    tags: Install httpd 
+
+  - name: install service
+    service:
+             name: httpd
+             state: started 
+    tags: install httpd service
+
+  - name: install apache
+    apt:
+         name: apache2
+         state: present
+    tags: install apache 
+
+  - name: intall service
+    service:
+             name: apache2
+             state: started 
+    tags: install apache service
+
+  - name: Copy index file
+    copy:
+          src: /home/ansible/playbooks/index.html
+          dest: /var/www/html/  
+          mode: 0666
+    tags: copy index file 

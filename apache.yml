@@ -1,0 +1,16 @@
+---
+- name: to install apache2
+  hosts: all
+  become: true
+  tasks:
+  - name: to install apache 
+    apt:
+      name: apache2
+      state: present
+      notify: start apache
+
+  handlers:       
+  - name: start apache
+    service:
+      name: apache2
+      state: restarted    

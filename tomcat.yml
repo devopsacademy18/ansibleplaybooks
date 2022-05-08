@@ -1,0 +1,31 @@
+---
+- name: To install tomcat
+  hosts: all
+  become: true
+  tasks:
+
+  - name: install java
+    yum:
+         name: java
+         state: installed
+
+  - name: download tomcat
+    get_url:
+             url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.62/bin/apache-tomcat-9.0.62.tar.gz
+             dest: /opt
+
+  - name: extract gzip files
+    unarchive:
+               src: /opt/apache-tomcat-9.0.62.tar.gz
+               dest: /opt
+               remote_src: yes
+           
+  - name: Add excute permission
+    file:
+          path: /opt/apache-tomcat-9.0.62/bin/startup.sh
+          mode: 0777
+
+  - name: Start service
+    shell: nohup ./startup.sh    
+    args:
+           chdir: /opt/apache-tomcat-9.0.62/bin      

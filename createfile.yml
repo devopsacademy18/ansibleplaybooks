@@ -1,0 +1,10 @@
+---
+- name: TO create a file
+  hosts: all
+  become: yes
+  gather_facts: no  
+  tasks:
+  - name: create file
+    file:
+      path: /home/ansible/testfiledir
+      state: directory 
